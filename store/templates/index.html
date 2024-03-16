@@ -1,0 +1,303 @@
+{% extends 'base.html'%}
+{% load cart%}
+{% block customer%}
+<li class="nav-item">
+  <a class="nav-link " href="/profile" style="color:white;">
+    <i class="fa fa-user"></i> 
+   Welcome {{customer.name}} !!
+  </a>
+</li>
+{% endblock customer%}
+{% block body%}
+ background-color:rgb(248, 240, 227,0.5);
+{% endblock body%}
+{% block content %}
+
+
+
+<section style="padding:150px 50px 50px 50px;">
+  <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="10000">
+        <a  href="/products?category_id=2"> <img src="static/banners/banner5.webp" class="d-block w-100" alt="..." height="650px" ></a>
+      </div>
+      <div class="carousel-item" data-bs-interval="2000">
+        <a  href="/products?category_id=5" ><img src="static/banners/banner9.webp" class="d-block w-100" alt="..." height="650px" ></a>
+      </div>
+      <div class="carousel-item">
+        <a  href="/products?category_id=6"><img src="static/banners/banner10.webp" class="d-block w-100" alt="..." height="650px"></a>
+
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev" >
+      <span class="carousel-control-prev-icon" aria-hidden="true" ></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+
+<section style="padding:30px 250px 0px 50px;">
+    <div class="container">
+      <img src="static/imag/images/download.jpeg" alt=.... width="1300px" height="450px" usemap="#shop" >
+      <map name="shop">
+        <a  href="/products?category_id=2" class="nav-link" href="/products" style="color:white"><area shape="rect" coords="26,108,523,640"  alt="women"></a>
+        <a  href="/products?category_id=1" class="nav-link" href="/products" style="color:white"><area shape="rect" coords="550,268,929,632"  alt="men"></a>
+        <a  href="/products?category_id=6" class="nav-link" href="/products" style="color:white"><area shape="rect" coords="958,274,1348,639"  alt="kid" ></a>
+      </div>
+      </section>
+          <section style="padding:90px 0px 90px 0px;" >
+            <div class="" style="margin:0px 40px; background-color:rgba(248, 240, 227,0.6); border-radius:20px;">
+              <h1 style="display:flex; justify-content:center;"><a style="text-decoration:none; color:black; font-family:Georgia; margin-top:20px;" href="/">Checkout new categories</a></h1>
+              <div class="box-container" style="border:2px ; padding:20px;">
+                <div class="row ">
+                <div class="col-md-12  justify-centent-center">
+                        <div class="product-list">
+                {% for category in categories %}
+            <div class="card " style="width: 16rem;border:5px solid white;">
+                <a style="text-decoration:none; color:black;" href="/products?category_id={{ category.id }}"> <img src="{{category.image.url}}" class="card-img-top" alt="..." height="200"></a>
+                <div class="card-body " style="height:8px;">
+                  <h6 class="card-text"><a style="text-decoration:none;color:black;" href="/products?category_id={{ category.id }}"> {{ category.name }}</a></h6>
+                </div>
+              </div>
+              {%endfor%}
+            </div>
+            </div>
+            </div>
+            </div>
+</div> 
+<section class="" data-setbg="static/imag/images/handbag.jpg" style="background-image: url(&quot;static/imag/images/handbag.jpg&quot;); margin-top:50px;  ">
+  <div class="container" style="height:400px">
+     <div class="col-lg-6 text-center">
+  <div class="section-title" style="padding:50px 0px 0px 0px ">
+  <h2>
+  "Deal Of The Week"
+  </h2>
+  <p>
+ "Get 30% off in handbags,
+ <br>
+  valid till 20th March,2024 
+  <br>
+  starting from: Rs450"
+  </p>
+  <div class="product-price">
+    <h3> HandBag</h3>
+  </div>
+  
+  </div>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col">
+        <div class="countdown-item">
+          <span id="days" class="countdown-value"></span>
+          <p class="countdown-label">Days</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="countdown-item">
+          <span id="hours" class="countdown-value"></span>
+          <p class="countdown-label">Hours</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="countdown-item">
+          <span id="minutes" class="countdown-value"></span>
+          <p class="countdown-label">Minutes</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="countdown-item">
+          <span id="seconds" class="countdown-value"></span>
+          <p class="countdown-label">Seconds</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function updateCountdown() {
+      const countdownDate = new Date("2024-3-20 23:59:59").getTime();
+      const now = new Date().getTime();
+      const timeRemaining = countdownDate - now;
+      
+      const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+      
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+    }
+    
+    setInterval(updateCountdown, 1000);
+  </script>
+  
+  <a  href="/products?category_id=7" class=" btn btn-primary">Shop Now</a>
+  
+  </div>
+  
+  </div>
+  
+  </section>
+          <section style="padding:50px 0 ;">
+            <div class="" style="margin:0px 50px ;">
+              <div class="row" style="margin-bottom:40px;">
+          <div class="col-md-12" style="background-color:rgba(248, 240, 227,0.6); border-radius:20px;">
+              <div class="row product-row mx-auto mb-2">
+                  {% if products|length == 0 %}
+                  <div class="alert alert-warning col-12">
+                      <strong>
+                          <h3>No Product Found!</h3>
+                      </strong>
+                  </div>
+                  {% elif products|length > 0 %}
+                  <center><h1 style=" margin-bottom:30px ; margin-top:20px;"> Trendy Products</h1></center>
+                  {% for product in products %}
+                      <div id="{{ product.id }}" class="col-md-3 mb-3">
+                          <div class="card product-card mb-2" style="border:5px solid white; height:350px; width:300px;">
+                              <a  href="/products?id={{ product.id }}"> <img class="card-img-top" src="{{ product.image1.url }}" height="210px" width="150px" alt="Card image cap"></a>
+                              <div class="card-body">
+                                <b><small class="card-title" >{{ product.name|truncatechars:60 }}</small></b>
+                                <b><small  style=" font-weight:100px;"class="card-text">{{ product.price|currency }}</small><br></b>
+                              </div>
+                              <div class="card-footer" >
+                                  <form action="/products#{{ product.id }}" method="POST">
+                                      {% csrf_token %}
+                                      <input type="hidden" value="{{ product.id }}" name="product">
+                                      {% if product|is_in_cart:request.session.cart %}
+                                      <a class="btn btn-warning" href="/cart">Go to cart </a>
+                                      {% else %}
+                                     <small> <input class="btn btn-primary " type="submit" value="Add to cart" ></small>
+                                      {% endif %}
+                                  
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                      {% endfor %}
+                      <a href="/products"><center><span class="btn" style="width:100px; margin-top:30px; margin-bottom:30px; background-color:lightblue;" >See More</span></a>
+                  {% endif %}
+              </div>
+          </div>
+      </div>
+  </div> 
+</section>
+
+
+  <section style="margin-top:40px;padding:40px 0px 0px 0px;height:200px;background-color:rgba(255,255,255,0.8)" >
+    <div class="container">
+        <div class="benefit-items">
+          <div class="row">
+          <div class="col-lg-4">
+          <div class="single-benefit">
+             <div class="sb-icon">
+          <img src="static/imag/images/icon-1.png.webp" alt>
+          </div>
+          <div class="sb-text">
+          <h6>Free Shipping</h6>
+          <p>For all order over 999rs.</p>
+          </div> </div>
+          </div>
+          <div class="col-lg-4">
+          <div class="single-benefit">
+          <div class="sb-icon">
+          <img src="static/imag/images/icon-2.png.webp" alt>
+          </div>
+          <div class="sb-text">
+            <h6>Delivery On Time</h6>
+            <p>If good have problems</p>
+          </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="single-benefit">
+            <div class="sb-icon">
+            <img src="static/imag/images/icon-1.png.webp" alt>
+          </div>
+          <div class="sb-text">
+            <h6>Secure Payment</h6>
+            <p>100% secure payment</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  </section>
+{%endblock content%}
+{% block footer %}
+
+<footer class="ftco-footer ftco-section"style="background-color:rgba(0,0,0,0.8);color:white;text-decoration:None; margin:80px 10px 0px 10px;">
+  <div class="container" >
+    <div class="row">
+      <div class="mouse">
+        <a href="#" class="mouse-icon">
+          <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+        </a>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2">Shopy Daraj</h2>
+          <p>Free Shipping for all orders upto Rs.999.</p>
+          <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+            <a href="https://twitter.com" target="_blank"><span class="fa fa-twitter"></span></a>
+            <a href="https://www.facebook.com/" target="_blank"><span class="fa fa-facebook"></span></a>
+            <a href="https://www.instagram.com/" target="_blank"><span class="fa fa-instagram"></span></a>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4 ml-md-5">
+          <h2 class="ftco-heading-2">Quick Links</h2>
+          <ul class="list-unstyled">
+            <li><a href="/" class="py-2 d-block">Home</a></li>
+            <li><a href="/categories" class="py-2 d-block">Categories</a></li>
+            <li><a href="/products" class="py-2 d-block">Products</a></li>
+            {% comment %} <li><a href="#" class="py-2 d-block">Contact Us</a></li> {% endcomment %}
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4">
+         <div class="mb-4">
+          <h2 class="">Help</h2>
+          <div class="d-flex">
+            <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
+              <li class="py-2 ">Shipping Information</li>
+              <li class="py-2 ">Returns &amp; Exchange</li>
+              <li class="py-2 ">Terms &amp; Conditions</li>
+              <li class="py-2 ">Privacy Policy</li>
+            </ul>
+            <ul class="list-unstyled">
+              <li class="">FAQs</li>
+              <li class="">Contact</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class=" mb-4">
+          <h2 class="">Have a Questions?</h2>
+          <div class=" mb-3">
+            <ul>
+              <li><span class=""></span><span class="text">Amritsar, Punjab,India</span></li>
+              <li> <span class=""></span><span class="text">+91 1925 288772</span></li>
+              <li><span class=""></span><span class="text">mehal@gmail.com</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% endblock footer %}
+
+

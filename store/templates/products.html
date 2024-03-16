@@ -1,0 +1,61 @@
+{% extends 'base.html' %} {% load cart %} {% block title %} Eshop | Product {%endblock %}  {% load static%}
+{% block body%}
+ background-color:rgb(248, 240, 227,0.5);
+{% endblock body%} {% block content %}
+<section style="padding: 20px ;" >
+    <div class="row" style="margin:0px 80px;">
+          <div class=" col-md-2 mb-3"  style="position:fixed; top:150px;left:0;">
+              <ul class="list-group">
+                  <li class="list-group-item  list-group-item-action active bg-secondary  border-0">
+                      <a style="text-decoration: none; color: white" href="/products">All Categories</a>
+                    </li>
+                    {% for category in categories %}
+                    <li class="list-group-item  ">
+                        <a style="text-decoration: none; color: black"href="/products?category_id={{ category.id }} ">{{ category.name }}</a >
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div> </section>
+                <section>
+      <div class="col-md-10 " style="margin-left:250px;" >
+        <div class="row product-row mx-auto mb-2">
+          {% if products|length == 0 %}
+          <div class="alert alert-warning col-12">
+            <strong>
+              <h3>No Product Found!</h3>
+            </strong>
+          </div>
+          {% elif products|length > 0 %}
+          <center><h1 style="padding: 10px ;margin-top:50px;">All Products</h1></center>
+          {% for product in products %}
+          <div id="{{ product.id }}" class="col-md-3 mb-4">
+            <div class="card product-card mb-2" style="height:460px">
+              <a href="/products?id={{ product.id }}">
+                <img class="card-img-top" src="{{ product.image1.url }}" height="300px" alt="Card image cap" ></a>
+              <div class="card-body">
+                <small class="card-title">{{ product.name|truncatechars:60 }}</small><br>
+                <small class="card-text">{{ product.price|currency }}</small>
+              </div>
+              <div class="card-footer">
+                <form action="/products#{{ product.id }}" method="POST">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{ product.id }}"name="product"/>
+                  {% if product|is_in_cart:request.session.cart %}
+                  <a class="btn btn-warning" href="/cart">Go to cart </a>
+                  {% else %}
+                  <input
+                    class="btn btn-primary"
+                    type="submit"
+                    value="Add to cart"
+                  />
+                  {% endif %}
+                </form>
+              </div>
+            </div>
+          </div>
+          {% endfor %} {% endif %}
+        </div>
+      </div>
+    </div>
+</section>
+ {%endblock %}

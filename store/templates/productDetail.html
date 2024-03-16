@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load cart %}
+{% block title %} Eshop | Product {% endblock %}
+{% block body%}
+ background-color:rgb(248, 240, 227,0.5);
+{% endblock body%}
+{% block content %}
+
+{% if product %}
+<section style="padding:20px ; margin-top:100px;">
+               <center> <h2>Product Details</h2><center>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+                    <div class="card-body">
+                        <div class="row">
+                            <section style="padding:0px 100px 0px 100px;"> 
+                                <div class="card mb-3" style="max-width: 1000px; background-color:#eff1e9;  border:5px solid #DCDCDC;">
+                                    <div class="row g-0">
+                                      <div class="col-md-8">
+                                        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                                            <div class="carousel-inner " style="margin:30px 0px 0px 100px;">
+                                              <div class="carousel-item active" data-bs-interval="5000">
+                                                <img src="{{ product.image1.url }}" style="height:400px ;width:450px; padding:10px;" class="img-fluid rounded-start"class="d-block w-100" alt="{{ product.name }}"  alt="">
+                                              </div>
+                                              <div class="carousel-item" data-bs-interval="4000">
+                                                <img src="{{ product.image2.url }}" style="height:400px ;width:450px;  padding:10px;" alt="{{ product.name }}" class="img-fluid rounded-start" class="d-block w-100" alt="...">
+                                               
+                                              </div>
+                                              <div class="carousel-item" data-bs-interval="2000">
+                                                <img src="{{ product.image3.url }}" style="height:400px ;width:450px;  padding:10px;" alt="{{ product.name }}" class="img-fluid rounded-start" class="d-block w-100" alt="...">
+                                              </div>
+                                            </div>
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev" style="margin-left:40px;">
+                                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                              <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next"  style="margin-right:-20px;">
+                                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                              <span class="visually-hidden ">Next</span>
+                                            </button>
+                                          </div>
+                                        
+                                      </div>
+                                      <div class="col-md-4 ml-8" >
+                                        <div class="col" style="padding:30px 30px ">
+                                          <div class="col-md-auto" >
+                                              <img src="{{ product.image1.url }}" style="height:113px; width:150px; margin:10px 0px 20px 0px;" alt="{{ product.name }}">
+                                          </div>
+                                          <div class="col-md-auto" style="padding:">
+                                              <img src="{{ product.image2.url }}" style="height:113px; width:150px;  margin-bottom:20px;" alt="{{ product.name }}">
+                                          </div>
+                                          <div class="col-md-auto">
+                                              <img src="{{ product.image3.url }}"style="height:113px; width:150px;  margin-bottom:20px;" alt="{{ product.name }}">
+                                          </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-12 pl-5 pr-5">
+                                        <div class="card-body">
+                                          <h5 class="card-title">{{ product.name }}</h5>
+                                          <p class="card-text"><h1 class="font-weight-light"></h1>
+                                            <p class="font-weight-light"><strong>Price: {{ product.price|currency }}</p></strong>
+                                          <p class="card-text"><strong>Description: </strong><small class="text-muted">{{ product.description }}</small></p>
+                                                </div>
+                                              
+                                                <div class="card-footer mb-0">
+                                          <form action="/products#{{ product.id }}" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ product.id }}" name="product">
+                                            {% if product|is_in_cart:request.session.cart %}
+                                            <center><a class="btn btn-warning" href="/cart">Go to cart </a></center>
+                                            {% else %}
+                                             
+                                            <center><input class=" float-bottom btn btn-primary" type="submit" value="Add to cart"></center>
+                                             
+                                            {% endif %}
+                                        </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </section> 
+                        </div>
+                    </div>
+                            </div>
+                            </div>
+                    </div>
+                {% endif %}
+                  </div>
+                  </div>
+                </div>
+
+   {% endblock %}

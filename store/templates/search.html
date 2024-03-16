@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load cart %}
+{% block title %} Eshop | Product {% endblock %}
+{% block body %}
+background-color:rgb(248, 240, 227,0.5);
+{% endblock body %}
+
+{% block content %}
+<section style="padding:60px; margin-top:50px;" >
+    {% comment %} <div class="container"> {% endcomment %}
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="row product-row mx-auto mb-2">
+                    {% if products %}
+                    <h5 style="padding:20px;"> Search results for: {{result}}</h5>
+          {% for product in products%}
+              <div id="{{ product.id }}" class="col-md-3 mb-3">
+                  <div class="card product-card mb-2" style="height:460px;">
+                      <a  href="/products?id={{ product.id }}"> <img class="card-img-top" src="{{ product.image1.url }}" height="300px" alt="Card image cap"></a>
+                      <div class="card-body">
+                          <small class="card-title">{{ product.name|truncatechars:60 }}</small><br>
+                          <small class="card-text">{{ product.price|currency }}</small>
+                      </div>
+                      <div class="card-footer">
+                          <form action="/products#{{ product.id }}" method="POST">
+                              {% csrf_token %}
+                              <input type="hidden" value="{{ product.id }}" name="product">
+                              {% if product|is_in_cart:request.session.cart %}
+                              <a class="btn btn-warning" href="/cart">Go to cart </a>
+                              {% else %}
+                              <input class="btn btn-primary" type="submit" value="Add to cart">
+                              {% endif %}
+                          
+                          </form>
+                      </div>
+                  </div>
+              </div>
+             {% endfor%}
+             {% else%}
+             <img src="static/product/not_found.webp" style="margin-top:100px; margin-left:400px; height:300px; width:500px;">
+             <p style="margin-left:450px;"> Product not found. Try searching something else</p>
+          {% endif %}
+          
+      </div>
+  </div>
+</div>
+{% comment %} </div> {% endcomment %}
+</section>
+
+{% endblock %}

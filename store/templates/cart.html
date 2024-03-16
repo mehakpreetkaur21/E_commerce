@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load cart %}
+{% block body%}
+background-color:rgb(248, 240, 227,0.5);
+{% endblock body%}
+{% block title %} Eshop | Cart {% endblock %}
+{% block content %}
+<div class="container " style="margin-top:120px;">
+    <div class="row">
+        {% if request.session.cart %}
+        <center><h1 class="font-weight-light">Cart</h1></center>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>S.no</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th><center>Actions</center></th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+            	{% for product in allProduct %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>   <a href="/products?id={{ product.id }}"><img height="80px" width="100px" src="{{ product.image1.url }}" alt=""></td></a>
+                    <td style="width:400px;">{{ product.name }}</td>
+                    <td>{{ product.price|currency }}</td>
+                    <td>{{ product|cart_quantity:request.session.cart }}</td>
+                    <td>
+                    	<a href="cart?increase={{ product.id }}" class="btn btn-sm btn-warning">+</a>
+                        <a href="cart?decrease={{ product.id }}" class="btn btn-sm btn-danger">-</a>
+                        <a href="cart?remove_item={{ product.id }}" class="btn btn-sm btn-danger">Remove Product</a>
+                    <th>{{ product|price_subtotal:request.session.cart|currency }}</th>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+            	<tr>
+            		<td colspan="5"></td>
+            		<td colspan="1"><strong>Total : </strong></td>
+            		<td>{{ allProduct|price_total:request.session.cart|currency }}</td>
+            	</tr>
+            </tfoot>
+        </table>
+    </div>
+    <hr>
+    <div class="float-right">
+       <a href="/checkout"> <button type="button" class="btn btn-success btn-lg"  >
+            Checkout
+        </button><a>
+       
+    </div>
+    <form action="/cart" method="GET">
+       <div class="form-group">
+       
+          <input type="submit" value="Clear Cart" class="btn btn-danger" name="clear_cart">
+      </div>
+  </form>
+   
+    {% else %}
+        <img src="static/imag/images/R.jpg"style="margin-top:150px; margin-left:250px; height:500px; width:600px;">
+    {% endif %}
+
+</div>
+{% endblock %}

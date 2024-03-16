@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body%}
+background-color:rgb(248, 240, 227,0.5);
+{% endblock body%}
+{% block content %}
+<style media="screen">
+  {% comment %} body {
+    background-color:#8c9eff;
+  } {% endcomment %}
+  .profile_pic{
+      width: 250px;
+      height: 250px;
+      background-color: yellow;
+      border:3px solid #DCDCDC ;
+    {% comment %} border-radius:50%; {% endcomment %}
+  }
+</style>
+<br><br><br>
+<div style="padding-left:300px; margin-top:50px;" class="container">
+  <h1 style="margin-left:100px;"> My Profile</h1>
+  <div style="margin-top:30px; border:5px solid #DCDCDC; background-color:#F8F8FF;" class="container col-md-6 ml-3 p-5">
+
+        <div class="col-sm-2 col-md-2">
+            {% if customer%}
+            {% if customer.profile_pic%}
+            <img src="{{customer.profile_pic.url }}" alt="profile pic" class="profile_pic rounded-circle" />
+        </div>
+        <div class="col-sm-4 col-md-4 mt-2">
+            <blockquote>
+                <p>{{customer.name}}</p> <small><cite title="Source Title">{{customer.email}}  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
+            </blockquote>
+            <p> <i class="glyphicon glyphicon-phone"></i> {{customer.phone}}
+            </p>
+            {% else%}
+            <blockquote>
+              <p>{{customer.name}}</p> <small><cite title="Source Title">{{customer.email}}  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
+          </blockquote>
+            {% endif%}
+            {% endif%}
+        </div>
+
+</div>
+</div>
+<br>
+{% comment %} <div style="text-align: center;"> {% endcomment %}
+  {% comment %} <a href="/edit-profile"><button class="button" ><span>Edit Profile </span></button></a> {% endcomment %}
+{% comment %} </div>
+<br><br><br><br><br><br> {% endcomment %}
+{% endblock content %}

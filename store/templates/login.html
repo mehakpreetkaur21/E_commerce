@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Eshop | Signup {% endblock%}
+{% block body%}
+background-color:rgb(248, 240, 227,0.5);
+{% endblock body%}
+{% block content %}
+<style>
+    #img{
+        background-image:url('static/index1.webp');
+        {% comment %} background-color:rgba(128,128,128,0.9); {% endcomment %}
+        {% comment %} opacity:0.5; {% endcomment %}
+    }
+    {% comment %} #text {
+        color: #FFF;
+        font-weight: 900;
+      } {% endcomment %}
+</style>
+    <div class="row" id="text" style="margin-top:150px;">
+                <div class="col-md-6 offset-md-3"style="margin-top:60px; height:500px; background-image:url('static/index1.webp') ; border:5px solid grey; border-radius:5px; ">
+            <center><h1 style="color:white;">Login here </h1></center>
+            <hr>
+            <form action="{% url 'login' %}" method="POST" style="border:2px;padding:20px; margin:0px 100px 50px 100px; background-color:rgba(255,255,255,0.8);opacity:0.8">
+                {% csrf_token %}
+                {% if error %}
+                    <small style="color:red"> {{ error }} </small>
+                {% endif %}
+                <div class="form-group">
+                    <label for="email" style=";">Email address</label>
+                    <input value="{{ userData.email }}" name="email" type="email" class="form-control shadow" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="password"style="" >Password</label>
+                    <input name="password" type="password" class="form-control" id="password" placeholder="Enter Password">
+                </div>
+                <button type="submit" class="btn btn-primary">LOGIN</button>
+                <div style="margin-top:30px;">
+               <b><span style="color:black; margin-top:20px;"  >Don't have account?</span><b><button class="btn btn-primary" style="margin-left:20px ;"><a href="/signup" style="text-decoration:None; color:white;">Signup</a></button>
+            </div>
+            </form>
+    </div>
+    </div>
+</div>
+{% endblock %}

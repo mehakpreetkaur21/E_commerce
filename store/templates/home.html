@@ -1,0 +1,86 @@
+{% extends 'base.html'%}
+{% load cart%}
+{% block content %}
+  {% comment %} <form action="/categories" method="GET"> {% endcomment %}
+<div class="container" style=" padding:20px;">
+  <h1 style="display:flex; justify-content:center;"><a style="text-decoration:none; color:black;" href="/">All Categories</a></h1>
+  <div class="box-container" style="border:2px ; padding:20px;">
+    <div class="row">
+    <div class="col-md-10 ">
+        <div class="row product-row  mr-4 ml-4 mb-2">
+    {% for category in categories %}
+<div class="card" style="width: 18rem; margin:20px;">
+    <a style="text-decoration:none; color:black;" href="/products?category_id={{ category.id }}"> <img src="{{category.image.url}}" class="card-img-top" alt="..."></a>
+    <div class="card-body">
+      <h6 class="card-text"><a style="text-decoration:none; color:black;" href="/products?category_id={{ category.id }}"> {{ category.name }}</a></h6>
+    </div>
+  </div>
+  {%endfor%}
+</div>
+</div>
+</div>
+</div>
+</div>
+{% comment %} </form> {% endcomment %}
+</section>
+</section>
+{%endblock content%}
+
+{% comment %} {% extends 'base.html'%}
+{% block content %}
+{% load cart%}
+<div class="container">
+    <marquee style='background-color:aqua;'>
+        <a style="text-decoration:none; color:black; margin-top:80px;" href="/categories">All Category</a></marquee>
+        {% for category in categories %}
+        <div class="row">
+            <ul class="card product-card ">
+                <div class='card product-card '>
+                <a style="text-decoration:none; color:black;" href="/?category_id={{ category.id }}"> <img class="card-img-top" src="{{ category.image.url }}" height="200px" alt="Card image cap">{{ category.name }} </a>
+                {% endfor %}
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}  {% endcomment %}
+
+
+
+{% comment %} 
+<div class="container">
+<marquee style='background-color:aqua;'>
+    <a style="text-decoration:none; color:black; margin-top:80px;" href="/categories">All Category</a></marquee>
+    {% for category in categories %}
+    <div class="row product-row  ml-4 mb-2 ">
+        
+<div class="card" style="width: 18rem;">
+    <a style="text-decoration:none; color:black;" href="/?category_id={{ category.id }}"> <img src="{{category.image.url}}" class="card-img-top" alt="..."></a>
+    <div class="card-body">
+      <h6 class="card-text"><a style="text-decoration:none; color:black;" href="/?category_id={{ category.id }}"> {{ category.name }}</a></h6>
+    </div>
+  </div>
+  {%endfor%}
+</div>
+</div> {% endcomment %}
+
+
+{% comment %} <div class="container">
+    <div class="col-md-10">
+        <div class="row product-row mx-auto mb-2">
+    <marquee style='background-color:aqua;'>
+        <a style="text-decoration:none; color:black; margin-top:80px;" href="/categories">All Category</a></marquee>
+        {% for category in categories %}
+        <div class="row mr-auto mt-3">
+            <ul class="col-md-4 mb-6">
+                <div class="card product-card mb-2">
+                <a style="text-decoration:none; color:black;" href="/?category_id={{ category.id }}"> <img class="card-img-top" src="{{ category.image.url }}" height="200px" alt="Card image cap">{{ category.name }} </a>
+                
+                {% endfor %}
+                </div>
+            </ul>
+        </div>
+    </div>
+</div> {% endcomment %}
+{% comment %} {% endblock content %}  {% endcomment %}
+
